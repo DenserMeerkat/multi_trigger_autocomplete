@@ -230,14 +230,15 @@ class MultiTriggerAutocompleteState extends State<MultiTriggerAutocomplete> {
 
     final end = querySelection.extentOffset;
 
-    final alreadyContainsSpace = text.substring(end).startsWith(' ');
+    final alreadyContainsTriggerEnd =
+        text.substring(end).startsWith(trigger.triggerEnd);
     // Having extra space helps dismissing the auto-completion view.
-    if (!alreadyContainsSpace) option += ' ';
+    if (!alreadyContainsTriggerEnd) option += trigger.triggerEnd;
 
     var selectionOffset = start + option.length;
     // In case the extra space is already there, we need to move the cursor
     // after the space.
-    if (alreadyContainsSpace) selectionOffset += 1;
+    if (alreadyContainsTriggerEnd) selectionOffset += trigger.triggerEnd.length;
 
     final newText = text.replaceRange(start, end, option);
     final newSelection = TextSelection.collapsed(offset: selectionOffset);
@@ -273,17 +274,32 @@ class MultiTriggerAutocompleteState extends State<MultiTriggerAutocomplete> {
     if (mounted) setState(() {});
   }
 
-  // Checks if there is any invoked autocomplete trigger and returns the first
-  // one along with the query that matches the current input.
+  // Checks if there is any invoked autocomplete trigger and returns the
+  // one with has the longest trigger length along with the query that
+  // matches the current input.
   _AutocompleteInvokedTriggerWithQuery? _getInvokedTriggerWithQuery(
     TextEditingValue textEditingValue,
   ) {
     final autocompleteTriggers = widget.autocompleteTriggers.toSet();
-    for (final trigger in autocompleteTriggers) {
-      final query = trigger.invokingTrigger(textEditingValue);
+    AutocompleteTrigger? finalTrigger;
+    AutocompleteQuery? finalQuery;
+    for (final autocompleteTrigger in autocompleteTriggers) {
+      final query = autocompleteTrigger.invokingTrigger(textEditingValue);
       if (query != null) {
-        return _AutocompleteInvokedTriggerWithQuery(trigger, query);
+        if (finalTrigger == null || finalQuery == null) {
+          finalTrigger = autocompleteTrigger;
+          finalQuery = query;
+        } else {
+          if (autocompleteTrigger.trigger.length >
+              finalTrigger.trigger.length) {
+            finalTrigger = autocompleteTrigger;
+            finalQuery = query;
+          }
+        }
       }
+    }
+    if (finalTrigger != null && finalQuery != null) {
+      return _AutocompleteInvokedTriggerWithQuery(finalTrigger, finalQuery);
     }
     return null;
   }

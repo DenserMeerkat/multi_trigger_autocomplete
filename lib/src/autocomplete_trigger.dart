@@ -14,6 +14,7 @@ class AutocompleteTrigger {
   /// autocomplete suggestions.
   const AutocompleteTrigger({
     required this.trigger,
+    this.triggerEnd = ' ',
     required this.optionsViewBuilder,
     this.triggerOnlyAtStart = false,
     this.triggerOnlyAfterSpace = true,
@@ -24,6 +25,11 @@ class AutocompleteTrigger {
   ///
   /// eg. '@', '#', ':'
   final String trigger;
+
+  /// The trigger end character.
+  /// This is used to determine when the trigger ends.
+  /// By default, it's a space.
+  final String triggerEnd;
 
   /// Whether the [trigger] should only be recognised at the start of the input.
   final bool triggerOnlyAtStart;
@@ -47,6 +53,7 @@ class AutocompleteTrigger {
       other is AutocompleteTrigger &&
           runtimeType == other.runtimeType &&
           trigger == other.trigger &&
+          triggerEnd == other.triggerEnd &&
           triggerOnlyAtStart == other.triggerOnlyAtStart &&
           triggerOnlyAfterSpace == other.triggerOnlyAfterSpace &&
           minimumRequiredCharacters == other.minimumRequiredCharacters;
@@ -87,7 +94,7 @@ class AutocompleteTrigger {
     final textBeforeTrigger = text.substring(0, firstTriggerIndexBeforeCursor);
     if (triggerOnlyAfterSpace &&
         textBeforeTrigger.isNotEmpty &&
-        !(textBeforeTrigger.endsWith(' ') ||
+        !(textBeforeTrigger.endsWith(triggerEnd) ||
             textBeforeTrigger.endsWith('\n'))) {
       return null;
     }
@@ -101,7 +108,7 @@ class AutocompleteTrigger {
     // valid example: "@luke_skywa..."
     // invalid example: "@luke skywa..."
     final suggestionText = text.substring(suggestionStart, suggestionEnd);
-    if (suggestionText.contains(' ')) return null;
+    if (suggestionText.contains(triggerEnd)) return null;
 
     // A minimum number of characters can be provided to only show
     // suggestions after the customer has input enough characters.
