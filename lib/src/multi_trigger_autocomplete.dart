@@ -232,12 +232,12 @@ class MultiTriggerAutocompleteState extends State<MultiTriggerAutocomplete> {
 
     final alreadyContainsTriggerEnd =
         text.substring(end).startsWith(trigger.triggerEnd);
-    // Having extra space helps dismissing the auto-completion view.
+    // Having triggerEnd dismissing the auto-completion view.
     if (!alreadyContainsTriggerEnd) option += trigger.triggerEnd;
 
     var selectionOffset = start + option.length;
-    // In case the extra space is already there, we need to move the cursor
-    // after the space.
+    // In case the triggerEnd is already there, we need to move the cursor
+    // after the triggerEnd.
     if (alreadyContainsTriggerEnd) selectionOffset += trigger.triggerEnd.length;
 
     final newText = text.replaceRange(start, end, option);
