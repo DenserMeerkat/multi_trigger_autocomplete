@@ -283,21 +283,18 @@ class MultiTriggerAutocompleteState extends State<MultiTriggerAutocomplete> {
     final autocompleteTriggers = widget.autocompleteTriggers.toSet();
     AutocompleteTrigger? finalTrigger;
     AutocompleteQuery? finalQuery;
+
     for (final autocompleteTrigger in autocompleteTriggers) {
       final query = autocompleteTrigger.invokingTrigger(textEditingValue);
-      if (query != null) {
-        if (finalTrigger == null || finalQuery == null) {
-          finalTrigger = autocompleteTrigger;
-          finalQuery = query;
-        } else {
-          if (autocompleteTrigger.trigger.length >
-              finalTrigger.trigger.length) {
-            finalTrigger = autocompleteTrigger;
-            finalQuery = query;
-          }
-        }
+      if (query != null &&
+          (finalTrigger == null ||
+              autocompleteTrigger.trigger.length >
+                  finalTrigger.trigger.length)) {
+        finalTrigger = autocompleteTrigger;
+        finalQuery = query;
       }
     }
+
     if (finalTrigger != null && finalQuery != null) {
       return _AutocompleteInvokedTriggerWithQuery(finalTrigger, finalQuery);
     }
