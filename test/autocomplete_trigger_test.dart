@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:multi_trigger_autocomplete/src/autocomplete_trigger.dart';
+import 'package:multi_trigger_autocomplete_plus/src/autocomplete_trigger.dart';
 
 void main() {
   group('Autocomplete with trigger `@`', () {

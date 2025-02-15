@@ -1,14 +1,24 @@
-# Multi Trigger Autocomplete
+# Multi Trigger Autocomplete Plus
 
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://opensource.org/licenses/MIT) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/xsahil03x/multi_trigger_autocomplete/blob/master/LICENSE) [![Dart CI](https://github.com/xsahil03x/multi_trigger_autocomplete/workflows/multi_trigger_autocomplete/badge.svg)](https://github.com/xsahil03x/multi_trigger_autocomplete/actions) [![CodeCov](https://codecov.io/gh/xsahil03x/multi_trigger_autocomplete/branch/master/graph/badge.svg)](https://codecov.io/gh/xsahil03x/multi_trigger_autocomplete) [![Version](https://img.shields.io/pub/v/multi_trigger_autocomplete.svg)](https://pub.dartlang.org/packages/multi_trigger_autocomplete)
+
+> This is a fork from [multi_trigger_autocomplete](https://pub.dev/packages/multi_trigger_autocomplete)
 
 A flutter widget to add trigger based autocomplete functionality to your app.
 
 **Show some ❤️ and star the repo to support the project**
 
 <p>
-  <img src="https://github.com/xsahil03x/multi_trigger_autocomplete/blob/master/asset/package_demo.gif?raw=true" alt="An animated image of the MultiTriggerAutocomplete" height="400"/>
+  <img src="https://github.com/DenserMeerkat/multi_trigger_autocomplete_plus/blob/master/asset/package_demo.gif?raw=true" alt="An animated image of the MultiTriggerAutocomplete" height="400"/>
 </p>
+
+## Improvements
+
+This fork includes the following improvements over the original package:
+
+- **AutocompleteNoTrigger**: A Special trigger which allows allows autcomplete suggestions without a trigger character/string.
+- **Enhanced Customization**: Allows customization of `triggerEnd` instead of using a hardcoded space (`' '`).
+- **Prefix Triggers Handling**: Correctly identifies and handles triggers that share a common prefix, such as `{` and `{{`.
 
 ## Installation
 
@@ -16,7 +26,7 @@ Add the following to your `pubspec.yaml` and replace `[version]` with the latest
 
 ```yaml
 dependencies:
-  multi_trigger_autocomplete: ^[version]
+  multi_trigger_autocomplete_plus: ^[version]
 ```
 
 ## Usage
@@ -120,9 +130,9 @@ MultiTriggerAutocomplete(
 
 ## Demo
 
-| Mention Autocomplete                                                                                                                                     | Hashtag Autocomplete                                                                                                                                     | Emoji Autocomplete                                                                                                                                   |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <img src="https://github.com/xsahil03x/multi_trigger_autocomplete/blob/master/asset/mention_demo.gif?raw=true" height="400" alt="Mention Autocomplete"/> | <img src="https://github.com/xsahil03x/multi_trigger_autocomplete/blob/master/asset/hashtag_demo.gif?raw=true" height="400" alt="Hashtag Autocomplete"/> | <img src="https://github.com/xsahil03x/multi_trigger_autocomplete/blob/master/asset/emoji_demo.gif?raw=true" height="400" alt="Emoji Autocomplete"/> |
+| Mention Autocomplete                                                                                                                                              | Hashtag Autocomplete                                                                                                                                              | Emoji Autocomplete                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="https://github.com/DenserMeerkat/multi_trigger_autocomplete_plus/blob/master/asset/mention_demo.gif?raw=true" height="400" alt="Mention Autocomplete"/> | <img src="https://github.com/DenserMeerkat/multi_trigger_autocomplete_plus/blob/master/asset/hashtag_demo.gif?raw=true" height="400" alt="Hashtag Autocomplete"/> | <img src="https://github.com/DenserMeerkat/multi_trigger_autocomplete_plus/blob/master/asset/emoji_demo.gif?raw=true" height="400" alt="Emoji Autocomplete"/> |
 
 ## Customization
 

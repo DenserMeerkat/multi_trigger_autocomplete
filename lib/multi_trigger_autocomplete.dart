@@ -1,4 +1,4 @@
-library multi_trigger_autocomplete;
+library multi_trigger_autocomplete_plus;
 
 export 'package:flutter_portal/flutter_portal.dart' show Portal;
 

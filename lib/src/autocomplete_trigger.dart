@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multi_trigger_autocomplete/src/autocomplete_query.dart';
+import 'package:multi_trigger_autocomplete_plus/src/autocomplete_query.dart';
 
 /// The type of the [AutocompleteTrigger] callback which returns a [Widget] that
 /// displays the specified [options].
