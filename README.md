@@ -12,7 +12,7 @@ A flutter widget to add trigger based autocomplete functionality to your app.
 
 ## Installation
 
-Add the following to your  `pubspec.yaml`  and replace  `[version]`  with the latest version:
+Add the following to your `pubspec.yaml` and replace `[version]` with the latest version:
 
 ```yaml
 dependencies:
@@ -120,8 +120,8 @@ MultiTriggerAutocomplete(
 
 ## Demo
 
-| Mention Autocomplete                                                 | Hashtag Autocomplete                                                        | Emoji Autocomplete                                                      |
-|----------------------------------------------------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| Mention Autocomplete                                                                                                                                     | Hashtag Autocomplete                                                                                                                                     | Emoji Autocomplete                                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <img src="https://github.com/xsahil03x/multi_trigger_autocomplete/blob/master/asset/mention_demo.gif?raw=true" height="400" alt="Mention Autocomplete"/> | <img src="https://github.com/xsahil03x/multi_trigger_autocomplete/blob/master/asset/hashtag_demo.gif?raw=true" height="400" alt="Hashtag Autocomplete"/> | <img src="https://github.com/xsahil03x/multi_trigger_autocomplete/blob/master/asset/emoji_demo.gif?raw=true" height="400" alt="Emoji Autocomplete"/> |
 
 ## Customization
@@ -133,14 +133,14 @@ MultiTriggerAutocomplete(
   // Defines the autocomplete trigger that will be used to match the
   // text.
   autocompleteTriggers: autocompleteTriggers,
-  
+
   // Defines the alignment of the options view relative to the
   // fieldView.
   //
   // By default, the options view is aligned to the bottom of the
   // fieldView.
   optionsAlignment: OptionsAlignment.topStart,
-  
+
   // Defines the width to make the options as a multiple of the width
   // of the fieldView.
   //
@@ -149,33 +149,33 @@ MultiTriggerAutocomplete(
   //
   // Use null to remove this constraint.
   optionsWidthFactor: 1.0,
-  
+
   // Defines the duration of the debounce period for the
   // [TextEditingController].
   //
   // This is the time between the last character typed and the matching
   // is performed.
   debounceDuration: const Duration(milliseconds: 350),
-  
+
   // Defines the initial value to set in the internal
   // [TextEditingController].
   //
   // This value will be ignored if [TextEditingController] is provided.
   initialValue: const TextEditingValue(text: 'Hello'),
-  
+
   // Defines the [TextEditingController] that will be used for the
   // fieldView.
   //
   // If this parameter is provided, then [focusNode] must also be
   // provided.
   textEditingController: TextEditingController(text: 'Hello'),
-  
+
   // Defines the [FocusNode] that will be used for the fieldView.
   //
   // If this parameter is provided, then [textEditingController] must
   // also be provided.
   focusNode: FocusNode(),
-  
+
   // Defines the fieldView that will be used to input the text.
   //
   // By default, a [TextFormField] is used.
@@ -195,21 +195,26 @@ AutocompleteTrigger(
   // The trigger string/character that will be used to trigger the
   // autocomplete.
   trigger: '@',
-  
+
+  // The trigger end string/character that will be used to determine
+  // the end of the trigger.
+  // By default, it's a space.
+  triggerEnd: ' ',
+
   // If true, the [trigger] should only be recognised at
   // the start of the input text.
   //
   // valid example: "@luke hello"
   // invalid example: "Hello @luke"
   triggerOnlyAtStart: false,
-  
+
   // If true, the [trigger] should only be recognised after
   // a space.
   //
   // valid example: "@luke", "Hello @luke"
   // invalid example: "Hello@luke"
   triggerOnlyAfterSpace: true,
-  
+
   // A minimum number of characters can be provided to only show
   // suggestions after the user has input enough characters.
   //
@@ -217,7 +222,7 @@ AutocompleteTrigger(
   // "Hello @l" -> Shows zero suggestions.
   // "Hello @lu" -> Shows suggestions for @lu.
   minimumRequiredCharacters: 2,
-  
+
   // The options view builder is used to build the options view
   // that will be shown when the [trigger] is detected.
   optionsViewBuilder: (context, autocompleteQuery, controller) {
@@ -227,6 +232,34 @@ AutocompleteTrigger(
         // Accept the autocomplete option.
         final autocomplete = MultiTriggerAutocomplete.of(context);
         return autocomplete.acceptAutocompleteOption(user.id);
+      },
+    );
+  },
+)
+```
+
+### AutocompleteNoTrigger
+
+Can be used to display autocomplete suggestions without requiring a trigger string or character.
+
+```dart
+AutocompleteNoTrigger(
+  // A minimum number of characters can be provided to only show
+  // suggestions after the user has input enough characters.
+  minimumRequiredCharacters: 2,
+
+  // The options view builder is used to build the options view
+  // that will be shown when the [trigger] is detected.
+  optionsViewBuilder: (context, autocompleteQuery, controller) {
+    return MentionAutocompleteOptions(
+      query: autocompleteQuery.query,
+      onMentionUserTap: (user) {
+        // Accept the autocomplete option.
+        final autocomplete = MultiTriggerAutocomplete.of(context);
+        return autocomplete.acceptAutocompleteOption(user.id);
+
+        // Handle field unfocusing manually using a FocusNode
+        focusNode.unfocus();
       },
     );
   },
