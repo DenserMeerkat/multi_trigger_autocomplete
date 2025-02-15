@@ -62,7 +62,7 @@ to show the options view.
 Import the package:
 
 ```dart
-import 'package:multi_trigger_autocomplete/multi_trigger_autocomplete.dart';
+import 'package:multi_trigger_autocomplete_plus/multi_trigger_autocomplete.dart';
 ```
 
 Use the widget:
